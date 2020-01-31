@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import APIURL from '../helpers/environment'
 
 const VideoGame = (props) => {
     const [name, setName] = useState('');
@@ -15,7 +16,7 @@ const VideoGame = (props) => {
 
     let handleSubmit = (event) => {
         event.preventDefault();
-        fetch("http://localhost:3005/videogames", {
+        fetch(`${APIURL}/videogames`, {
             method: 'POST',
             body: JSON.stringify({name: name, description: description, rating: rating}),
             headers: new Headers({
@@ -30,7 +31,7 @@ const VideoGame = (props) => {
 
     let handleUpdate = (event) => {
         event.preventDefault();
-        fetch("http://localhost:3005/videogames/name", {
+        fetch(`${APIURL}/videogames/name`, {
             method: 'PUT',
             body: JSON.stringify({name: name2, description: description2, rating: rating2}),
             headers: new Headers({
@@ -45,7 +46,7 @@ const VideoGame = (props) => {
 
     let handleSearchID = (event) => {
         event.preventDefault();
-        fetch("http://localhost:3005/videogames/id/" + searchID, {
+        fetch(`${APIURL}/videogames/id/` + searchID, {
             method: 'GET',
             //body: JSON.stringify({id: searchID}),
             headers: new Headers({
@@ -60,7 +61,7 @@ const VideoGame = (props) => {
 
     let handleSearchName = (event) => {
         event.preventDefault();
-        fetch("http://localhost:3005/videogames/name/" + searchName, {
+        fetch(`${APIURL}/videogames/name/` + searchName, {
             method: 'GET',
             //body: JSON.stringify({id: searchID}),
             headers: new Headers({
