@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
     Navbar,
     NavbarBrand,
@@ -7,7 +8,9 @@ import {
 const Sitebar = (props) => {
     return (
         <Navbar color="faded" light expand="md">
-            <NavbarBrand href="/">Workout Log</NavbarBrand>
+            <NavbarBrand href="/">Reviews</NavbarBrand>
+            <NavbarBrand href="/signin">Sign In</NavbarBrand>
+            <NavbarBrand href="/signup">Sign Up</NavbarBrand>
         </Navbar>
     )
 }

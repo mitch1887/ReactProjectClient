@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Row, Col } from 'reactstrap';
 
 const Login = (props) => {
     const [email, setEmail] = useState('');
@@ -10,7 +10,7 @@ const Login = (props) => {
         console.log(email, password);
         fetch("http://localhost:3005/user/signin", {
             method: 'POST',
-            body: JSON.stringify({email: email, password: password}),
+            body: JSON.stringify({ email: email, password: password }),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
@@ -23,8 +23,8 @@ const Login = (props) => {
 
     return (
         <div>
-            <h1>Login</h1>
             <Form onSubmit={handleSubmit}>
+                <h1>Login</h1>
                 <FormGroup>
                     <Label htmlFor="email">Email</Label>
                     <Input onChange={(e) => setEmail(e.target.value)} name="email" value={email} />

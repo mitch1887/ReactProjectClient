@@ -1,6 +1,8 @@
 import React, { Component, useEffect, useState } from 'react';
-import Sitebar from './home/Navbar';
+import { Button } from 'reactstrap';
+import Navbar from './home/Navbar';
 import Auth from './auth/Auth';
+import Main from './main';
 
 function App() {
 
@@ -24,9 +26,9 @@ function App() {
   }
 
   return (
-    <div>
-      <Sitebar clickLogout={clearToken}/>
-      <Auth updateToken={updateToken}/>
+    <div className="App">
+      <Navbar />
+      <Main />
     </div>
   );
 }
