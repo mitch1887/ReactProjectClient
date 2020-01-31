@@ -5,7 +5,7 @@ switch (window.location.hostname) {
         APIURL = 'http://localhost:3000';
         break;
     case 'mc-react-client.herokuapp.com':
-        APIURL = 'https://mc-react-client.herokuapp.com';
+        APIURL = 'https://mc-react-server.herokuapp.com/';
         break;
 }
 
