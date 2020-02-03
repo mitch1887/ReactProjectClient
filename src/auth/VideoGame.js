@@ -14,41 +14,50 @@ const VideoGame = (props) => {
     const [searchID, setSearchID] = useState('');
     const [searchName, setSearchName] = useState('');
 
+    const [deleteID, setDeleteID] = useState('');
+    const [deleteName, setDeleteName] = useState('');
+
     let handleSubmit = (event) => {
         event.preventDefault();
         fetch(`${APIURL}/videogames`, {
             method: 'POST',
             body: JSON.stringify({name: name, description: description, rating: rating}),
             headers: new Headers({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': props.sessionToken
             })
         }).then(
             (response) => response.json()
         ).then((data) => {
-            props.updateToken(data.sessionToken)
+            console.log(data)
+            // Write a prompt that tells the user what had been created
+            // Clear forms
         })
     }
 
     let handleUpdate = (event) => {
         event.preventDefault();
-        fetch(`${APIURL}/videogames/name`, {
+        fetch(`${APIURL}/videogames/name/${name2}`, {
             method: 'PUT',
             body: JSON.stringify({name: name2, description: description2, rating: rating2}),
             headers: new Headers({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': props.sessionToken
             })
         }).then(
             (response) => response.json()
         ).then((data) => {
-            props.updateToken(data.sessionToken)
+            console.log(data)
+            // Write a prompt that tells the user what had been updated
+            // Clear forms
+            
         })
     }
 
     let handleSearchID = (event) => {
         event.preventDefault();
-        fetch(`${APIURL}/videogames/id/` + searchID, {
+        fetch(`${APIURL}/videogames/id/${searchID}`, {
             method: 'GET',
-            //body: JSON.stringify({id: searchID}),
             headers: new Headers({
                 'Content-Type': 'application/json'
             })
@@ -61,11 +70,40 @@ const VideoGame = (props) => {
 
     let handleSearchName = (event) => {
         event.preventDefault();
-        fetch(`${APIURL}/videogames/name/` + searchName, {
+        fetch(`${APIURL}/videogames/name/${searchName}`, {
             method: 'GET',
-            //body: JSON.stringify({id: searchID}),
             headers: new Headers({
                 'Content-Type': 'application/json'
+            })
+        }).then(
+            (response) => response.json()
+        ).then((data) => {
+            console.log(data);
+        })
+    }
+
+    let handleDeleteID = (event) => {
+        event.preventDefault();
+        fetch(`${APIURL}/videogames/${deleteID}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': props.sessionToken
+            })
+        }).then(
+            (response) => response.json()
+        ).then((data) => {
+            console.log(data);
+        })
+    }
+
+    let handleDeleteName = (event) => {
+        event.preventDefault();
+        fetch(`${APIURL}/videogames/${deleteName}`, {
+            method: 'DELETE',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Authorization': props.sessionToken
             })
         }).then(
             (response) => response.json()
@@ -108,6 +146,7 @@ const VideoGame = (props) => {
                 </FormGroup>
                 <Button type="submit">Submit</Button>
             </Form>
+
             <h1>Get Review by ID</h1>
             <Form onSubmit={handleSearchID}>
                 <FormGroup>
@@ -121,6 +160,23 @@ const VideoGame = (props) => {
                 <FormGroup>
                     <Label htmlFor="searchName">Name</Label>
                     <Input onChange={(e) => setSearchName(e.target.value)} name="searchName" value={searchName} />
+                </FormGroup>
+                <Button type="submit">Submit</Button>
+            </Form>
+
+            <h1>Delete Review by ID</h1>
+            <Form onSubmit={handleDeleteID}>
+                <FormGroup>
+                    <Label htmlFor="deleteID">ID</Label>
+                    <Input onChange={(e) => setDeleteID(e.target.value)} name="deleteID" value={deleteID} />
+                </FormGroup>
+                <Button type="submit">Submit</Button>
+            </Form>
+            <h1>Delete Review by Name</h1>
+            <Form onSubmit={handleDeleteName}>
+                <FormGroup>
+                    <Label htmlFor="deleteName">Name</Label>
+                    <Input onChange={(e) => setDeleteName(e.target.value)} name="deleteName" value={deleteName} />
                 </FormGroup>
                 <Button type="submit">Submit</Button>
             </Form>

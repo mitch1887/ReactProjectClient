@@ -1,7 +1,5 @@
 import React, { Component, useEffect, useState } from 'react';
-import { Button } from 'reactstrap';
 import Navbar from './home/Navbar';
-import Auth from './auth/Auth';
 import Main from './main';
 
 function App() {
@@ -16,8 +14,8 @@ function App() {
 
   const updateToken = (newToken) => {
     localStorage.setItem('token', newToken);
+    console.log(newToken);
     setSessionToken(newToken);
-    console.log(sessionToken);
   }
 
   const clearToken = () => {
@@ -27,8 +25,8 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
-      <Main />
+      <Navbar updateToken={updateToken}/>
+      <Main updateToken={updateToken} sessionToken={sessionToken}/>
     </div>
   );
 }
