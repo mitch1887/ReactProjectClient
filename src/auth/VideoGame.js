@@ -17,6 +17,8 @@ const VideoGame = (props) => {
     const [deleteID, setDeleteID] = useState('');
     const [deleteName, setDeleteName] = useState('');
 
+    var submitText, updateText = useState('');
+
     let handleSubmit = (event) => {
         event.preventDefault();
         fetch(`${APIURL}/videogames`, {
@@ -30,8 +32,8 @@ const VideoGame = (props) => {
             (response) => response.json()
         ).then((data) => {
             console.log(data)
-            // Write a prompt that tells the user what had been created
-            // Clear forms
+            submitText = data;
+            
         })
     }
 
@@ -48,8 +50,7 @@ const VideoGame = (props) => {
             (response) => response.json()
         ).then((data) => {
             console.log(data)
-            // Write a prompt that tells the user what had been updated
-            // Clear forms
+            updateText = data;
             
         })
     }
@@ -129,7 +130,9 @@ const VideoGame = (props) => {
                     <Input onChange={(e) => setRating(e.target.value)} name="rating" value={rating} />
                 </FormGroup>
                 <Button type="submit">Submit</Button>
+                {submitText}
             </Form>
+            <br/>
             <h1>Update Review</h1>
             <Form onSubmit={handleUpdate}>
                 <FormGroup>
@@ -145,8 +148,9 @@ const VideoGame = (props) => {
                     <Input onChange={(e) => updateRating(e.target.value)} name="rating2" value={rating2} />
                 </FormGroup>
                 <Button type="submit">Submit</Button>
+                {updateText}
             </Form>
-
+            <br/>
             <h1>Get Review by ID</h1>
             <Form onSubmit={handleSearchID}>
                 <FormGroup>
@@ -155,6 +159,7 @@ const VideoGame = (props) => {
                 </FormGroup>
                 <Button type="submit">Submit</Button>
             </Form>
+            <br/>
             <h1>Get Review by Name</h1>
             <Form onSubmit={handleSearchName}>
                 <FormGroup>
@@ -163,7 +168,7 @@ const VideoGame = (props) => {
                 </FormGroup>
                 <Button type="submit">Submit</Button>
             </Form>
-
+            <br/>
             <h1>Delete Review by ID</h1>
             <Form onSubmit={handleDeleteID}>
                 <FormGroup>
@@ -172,6 +177,7 @@ const VideoGame = (props) => {
                 </FormGroup>
                 <Button type="submit">Submit</Button>
             </Form>
+            <br/>
             <h1>Delete Review by Name</h1>
             <Form onSubmit={handleDeleteName}>
                 <FormGroup>

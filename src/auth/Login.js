@@ -9,17 +9,29 @@ const Login = (props) => {
     let handleSubmit = (event) => {
         event.preventDefault();
         console.log(email, password);
-        fetch(`${APIURL}/user/signin`, {
-            method: 'POST',
-            body: JSON.stringify({ email: email, password: password }),
-            headers: new Headers({
-                'Content-Type': 'application/json'
+        
+        var emailValid = (/^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email))
+        var passwordValid = (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(password))
+        console.log(emailValid, passwordValid);
+
+        if (emailValid && passwordValid) {
+            fetch(`${APIURL}/user/signin`, {
+                method: 'POST',
+                body: JSON.stringify({ email: email, password: password }),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(
+                (response) => response.json()
+            ).then((data) => {
+                props.updateToken(data.sessionToken)
             })
-        }).then(
-            (response) => response.json()
-        ).then((data) => {
-            props.updateToken(data.sessionToken)
-        })
+        } else {
+            if (!emailValid)
+                console.log("Email invalid!")
+            if (!passwordValid)
+                console.log("Password must contain at least 8 characters, 1 number, 1 uppercase, and 1 lowercase!")
+        }
     }
 
     return (
