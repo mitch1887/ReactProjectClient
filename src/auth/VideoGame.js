@@ -17,7 +17,8 @@ const VideoGame = (props) => {
     const [deleteID, setDeleteID] = useState('');
     const [deleteName, setDeleteName] = useState('');
 
-    var submitText, updateText = useState('');
+    var [submitText, setSubmitText] = useState('');
+    var [updateText, setUpdateText] = useState('');
 
     let handleSubmit = (event) => {
         event.preventDefault();
@@ -31,7 +32,7 @@ const VideoGame = (props) => {
         }).then(
             (response) => response.json()
         ).then((data) => {
-            console.log(data)
+            alert("Review submitted! Name: " + data.name + ", Description: " + data.description + ", Rating: " + data.rating + "/10")
             submitText = data;
             
         })
@@ -50,6 +51,7 @@ const VideoGame = (props) => {
             (response) => response.json()
         ).then((data) => {
             console.log(data)
+            alert("Review for " + name2 + " updated!")
             updateText = data;
             
         })
@@ -66,6 +68,7 @@ const VideoGame = (props) => {
             (response) => response.json()
         ).then((data) => {
             console.log(data);
+            alert("Name: " + data.name + ", Description: " + data.description + ", Rating: " + data.rating + "/10, Owner: " + data.owner)
         })
     }
 
@@ -79,7 +82,7 @@ const VideoGame = (props) => {
         }).then(
             (response) => response.json()
         ).then((data) => {
-            console.log(data);
+            alert("Name: " + data.name + ", Description: " + data.description + ", Rating: " + data.rating + "/10, Owner: " + data.owner)
         })
     }
 
@@ -95,12 +98,13 @@ const VideoGame = (props) => {
             (response) => response.json()
         ).then((data) => {
             console.log(data);
+            alert("Review #" + deleteID + " deleted!")
         })
     }
 
     let handleDeleteName = (event) => {
         event.preventDefault();
-        fetch(`${APIURL}/videogames/${deleteName}`, {
+        fetch(`${APIURL}/videogames/name/${deleteName}`, {
             method: 'DELETE',
             headers: new Headers({
                 'Content-Type': 'application/json',
@@ -110,6 +114,7 @@ const VideoGame = (props) => {
             (response) => response.json()
         ).then((data) => {
             console.log(data);
+            alert("Review for " + deleteName + " deleted!")
         })
     }
 

@@ -15,6 +15,8 @@ function App() {
   const updateToken = (newToken) => {
     localStorage.setItem('token', newToken);
     console.log(newToken);
+    if (typeof newToken !== 'undefined')
+      alert("Logged in!");
     setSessionToken(newToken);
   }
 
@@ -25,8 +27,8 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar updateToken={updateToken}/>
-      <Main updateToken={updateToken} sessionToken={sessionToken}/>
+      <Navbar updateToken={updateToken} />
+      <Main updateToken={updateToken} sessionToken={sessionToken} />
     </div>
   );
 }

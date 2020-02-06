@@ -28,9 +28,9 @@ const Login = (props) => {
             })
         } else {
             if (!emailValid)
-                console.log("Email invalid!")
+                alert("Email invalid!")
             if (!passwordValid)
-                console.log("Password must contain at least 8 characters, 1 number, 1 uppercase, and 1 lowercase!")
+                alert("Password must contain at least 8 characters, 1 number, 1 uppercase, and 1 lowercase!")
         }
     }
 

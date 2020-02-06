@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { Form, FormGroup, Label, Input, Button, Alert } from 'reactstrap';
 import APIURL from '../helpers/environment'
 
 const Signup = (props) => {
@@ -32,13 +32,13 @@ const Signup = (props) => {
             })
         } else {
             if (!firstNameValid)
-                console.log("First name invalid!")
+                alert("First name invalid!")
             if (!lastNameValid)
-                console.log("Last name invalid!")
+                alert("Last name invalid!")
             if (!emailValid)
-                console.log("Email invalid!")
+                alert("Email invalid!")
             if (!passwordValid)
-                console.log("Password must contain at least 8 characters, 1 number, 1 uppercase, and 1 lowercase!")
+                alert("Password must contain at least 8 characters, 1 number, 1 uppercase, and 1 lowercase!")
         }
 
     }
